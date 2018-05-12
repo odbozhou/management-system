@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="../static/jslib/jquery-easyui-1.5.5.1/themes/default/easyui.css" th:href="@{jslib/jquery-easyui-1.5.5.1/themes/default/easyui.css}"/>
+    <link rel="stylesheet" type="text/css" href="../static/jslib/jquery-easyui-1.5.5.1/themes/icon.css" th:href="@{jslib/jquery-easyui-1.5.5.1/themes/icon.css}"/>
+    <link rel="stylesheet" type="text/css" href="../static/jslib/jquery-easyui-1.5.5.1/themes/color.css" th:href="@{jslib/jquery-easyui-1.5.5.1/themes/color.css}"/>
+    <script type="text/javascript" src="../static/jslib/jquery-easyui-1.5.5.1/jquery.min.js" th:src="@{jslib/jquery-easyui-1.5.5.1/jquery.min.js}"></script>
+    <script type="text/javascript" src="../static/jslib/jquery-easyui-1.5.5.1/jquery.easyui.min.js" th:src="@{jslib/jquery-easyui-1.5.5.1/jquery.easyui.min.js}"></script>
+</head>
+<body class="easyui-layout" >
+<div data-options="region:'north',title:'North Title',split:true" style="height:100px;"></div>
+<div data-options="region:'south',title:'South Title',split:true" style="height:100px;"></div>
+<div data-options="region:'east',iconCls:'icon-reload',title:'East',split:true" style="width:100px;"></div>
+<div data-options="region:'west',title:'West',split:true" style="width:100px;"></div>
+<div data-options="region:'center',title:'center title'" style="padding:5px;background:#eee;">
+    <div id="panel" class="easyui-panel" title="My Panel"
+         style="width:500px;height:150px;padding:10px;background:#fafafa;"
+         data-options="iconCls:'icon-save',closable:false,fit:true,
+                collapsible:true,minimizable:false,maximizable:false">
+        <table>
+            <tr><td>File to upload:</td><td><input type="file" name="file" id="upfile" readonly="readonly"/></td></tr>
+            <a id="btn" class="easyui-linkbutton" data-options="iconCls:'icon-add'" onclick="upload();">upload</a>
+        </table>
+        <div>
+            <img id="loading" th:src="@{image/process.gif}" style="display: none;" height="200px" width="200px"/>
+            <div id="file-list">
+            </div>
+            <div id="serverResponse"></div>
+            <div th:include="footer :: copy"></div>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

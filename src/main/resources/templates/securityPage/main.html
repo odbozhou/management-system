@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="../static/jslib/jquery-easyui-1.5.5.1/themes/default/easyui.css" th:href="@{jslib/jquery-easyui-1.5.5.1/themes/default/easyui.css}"/>
+    <link rel="stylesheet" type="text/css" href="../static/jslib/jquery-easyui-1.5.5.1/themes/icon.css" th:href="@{jslib/jquery-easyui-1.5.5.1/themes/icon.css}"/>
+    <link rel="stylesheet" type="text/css" href="../static/jslib/jquery-easyui-1.5.5.1/themes/color.css" th:href="@{jslib/jquery-easyui-1.5.5.1/themes/color.css}"/>
+    <script type="text/javascript" src="../static/jslib/jquery-easyui-1.5.5.1/jquery.min.js" th:src="@{jslib/jquery-easyui-1.5.5.1/jquery.min.js}"></script>
+    <script type="text/javascript" src="../static/jslib/jquery-easyui-1.5.5.1/jquery.easyui.min.js" th:src="@{jslib/jquery-easyui-1.5.5.1/jquery.easyui.min.js}"></script>
+</head>
+<body>
+<body id="mainLayout" class="easyui-layout">
+<div data-options="region:'north',href:'@{north.html}'" style="height: 70px; overflow: hidden;" class="logo"></div>
+<div data-options="region:'west',href:'',split:true" title="导航" style="width: 200px; padding: 10px;">
+    <ul id="mainMenu"></ul>
+</div>
+<div data-options="region:'center'" style="overflow: hidden;">
+    <div id="mainTabs">
+        <div title="关于SSHE" data-options="iconCls:'ext-icon-heart'"  th:replace="footer :: copy"  ></div>
+<!--        <div title="关于SSHE" data-options="iconCls:'ext-icon-heart'" >
+            <iframe th:src="@{welcome.html}" allowTransparency="true" style="border: 0; width: 100%; height: 99%;" frameBorder="0"></iframe>
+        </div>-->
+    </div>
+</div>
+<div data-options="region:'south',href:'@{south.html}',border:false" style="height: 30px; overflow: hidden;"></div>
+
+<!--<div id="loginDialog" title="解锁登录" style="display: none;">
+    <form method="post" class="form" onsubmit="return false;">
+        <table class="table">
+            <tr>
+                <th width="50">登录名</th>
+                <td><%=sessionInfo.getUser().getLoginname()%><input name="data.loginname" readonly="readonly" type="hidden" value="<%=sessionInfo.getUser().getLoginname()%>" /></td>
+            </tr>
+            <tr>
+                <th>密码</th>
+                <td><input name="data.pwd" type="password" class="easyui-validatebox" data-options="required:true" /></td>
+            </tr>
+        </table>
+    </form>
+</div>-->
+
+<!--<div id="passwordDialog" title="修改密码" style="display: none;">
+    <form method="post" class="form" onsubmit="return false;">
+        <table class="table">
+            <tr>
+                <th>新密码</th>
+                <td><input id="pwd" name="data.pwd" type="password" class="easyui-validatebox" data-options="required:true" /></td>
+            </tr>
+            <tr>
+                <th>重复密码</th>
+                <td><input type="password" class="easyui-validatebox" data-options="required:true,validType:'eqPwd[\'#pwd\']'" /></td>
+            </tr>
+        </table>
+    </form>
+</div>-->
+</body>
+</html>
