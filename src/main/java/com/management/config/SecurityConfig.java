@@ -1,6 +1,6 @@
 package com.management.config;
 
-import com.management.service.UserService;
+import com.management.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,7 +19,7 @@ import org.springframework.security.web.authentication.rememberme.TokenBasedReme
 class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private UserService userService;
+    private UserServiceImpl userService;
 
     @Bean
     public TokenBasedRememberMeServices rememberMeServices() {
@@ -43,7 +43,7 @@ class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
             .authorizeRequests()
-                .antMatchers("/", "/favicon.ico", "/css/**", "/signup").permitAll()
+                .antMatchers("/", "/favicon.ico", "/fonts/**", "/css/**", "/js/**", "/signup").permitAll()
                 .anyRequest().authenticated()
                 .and()
             .formLogin()

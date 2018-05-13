@@ -2,6 +2,8 @@ package com.management.service.impl;/**
  * Created by jiajia on 2018/5/12.
  */
 
+import com.management.common.BaseDao;
+import com.management.common.BaseServiceImpl;
 import com.management.dao.UserDao;
 import com.management.model.User;
 import com.management.service.UserService;
@@ -12,6 +14,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -26,7 +29,7 @@ import java.util.Collections;
  * @date 2018/5/12 11:07
  */
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl extends BaseServiceImpl<User> implements UserService, UserDetailsService {
 
     @Autowired
     private UserDao userDao;
@@ -39,6 +42,11 @@ public class UserServiceImpl implements UserService{
 /*        save(new User("student", "student", "ROLE_STUDENT"));
         save(new User("teacher", "teacher", "ROLE_TEACHER"));
         save(new User("admin", "admin", "ROLE_ADMIN"));*/
+    }
+
+    @Override
+    public BaseDao<User> getDao() {
+        return userDao;
     }
 
     @Override

@@ -2,16 +2,20 @@ package com.management.common;/**
  * Created by jiajia on 2018/5/9.
  */
 
+import java.io.Serializable;
+
 /**
  * @author jiajia
  * @version V1.0
  * @Description: baseService
  * @date 2018/5/9 23:09
  */
-public abstract class BaseService<T> {
+public interface BaseService<T> {
+    T save(T t);
 
-/*    public abstract  <T> getDao(){
+    int delete(Serializable id);
 
-    }*/
+    int update(T t);
 
+    T get(Serializable id);
 }
