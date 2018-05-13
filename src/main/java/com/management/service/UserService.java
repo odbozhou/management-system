@@ -13,4 +13,6 @@ import com.management.model.User;
  */
 public interface UserService extends BaseService<User>{
     void signin(User user);
+
+    User createNewUser(User userParam);
 }

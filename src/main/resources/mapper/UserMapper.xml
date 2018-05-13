@@ -16,7 +16,7 @@
     user_id, login_name, user_name, passwd, role, status, delete_status, create_time, 
     update_time
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <select id="get" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from user
@@ -28,21 +28,11 @@
     from user
     where login_name = #{userName,jdbcType=VARCHAR}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+  <delete id="delete" parameterType="java.lang.Integer">
     delete from user
     where user_id = #{userId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.management.model.User">
-    insert into user (user_id, login_name, user_name, 
-      passwd, role, status, 
-      delete_status, create_time, update_time
-      )
-    values (#{userId,jdbcType=INTEGER}, #{loginName,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, 
-      #{passwd,jdbcType=VARCHAR}, #{role,jdbcType=VARCHAR}, #{status,jdbcType=TINYINT}, 
-      #{deleteStatus,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
-      )
-  </insert>
-  <insert id="insertSelective" parameterType="com.management.model.User">
+  <insert id="insert" parameterType="com.management.model.User" useGeneratedKeys="true" keyProperty="userId">
     insert into user
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="userId != null">
@@ -103,7 +93,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.management.model.User">
+  <update id="update" parameterType="com.management.model.User">
     update user
     <set>
       <if test="loginName != null">
@@ -131,18 +121,6 @@
         update_time = #{updateTime,jdbcType=TIMESTAMP},
       </if>
     </set>
-    where user_id = #{userId,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.management.model.User">
-    update user
-    set login_name = #{loginName,jdbcType=VARCHAR},
-      user_name = #{userName,jdbcType=VARCHAR},
-      passwd = #{passwd,jdbcType=VARCHAR},
-      role = #{role,jdbcType=VARCHAR},
-      status = #{status,jdbcType=TINYINT},
-      delete_status = #{deleteStatus,jdbcType=TINYINT},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      update_time = #{updateTime,jdbcType=TIMESTAMP}
     where user_id = #{userId,jdbcType=INTEGER}
   </update>
 </mapper>

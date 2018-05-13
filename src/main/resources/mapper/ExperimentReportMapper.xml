@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.management.dao.ExperimentReportDao">
+    <resultMap id="BaseResultMap" type="com.management.model.ExperimentReport">
+        <id column="erid" jdbcType="INTEGER" property="erid"/>
+        <result column="cid" jdbcType="INTEGER" property="cid"/>
+        <result column="sid" jdbcType="INTEGER" property="sid"/>
+        <result column="eid" jdbcType="INTEGER" property="eid"/>
+        <result column="objective" jdbcType="VARCHAR" property="objective"/>
+        <result column="step" jdbcType="VARCHAR" property="step"/>
+        <result column="problem" jdbcType="VARCHAR" property="problem"/>
+        <result column="result" jdbcType="VARCHAR" property="result"/>
+        <result column="summary" jdbcType="VARCHAR" property="summary"/>
+        <result column="remarks" jdbcType="VARCHAR" property="remarks"/>
+        <result column="read_status" jdbcType="TINYINT" property="readStatus"/>
+        <result column="status" jdbcType="TINYINT" property="status"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    erid, cid, sid, eid, objective, step, problem, result, summary, remarks, read_status, 
+    status, create_time, update_time
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from experiment_report
+        where erid = #{erid,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from experiment_report
+        where erid = #{erid,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.management.model.ExperimentReport">
+    insert into experiment_report (erid, cid, sid, 
+      eid, objective, step, 
+      problem, result, summary, 
+      remarks, read_status, status, 
+      create_time, update_time)
+    values (#{erid,jdbcType=INTEGER}, #{cid,jdbcType=INTEGER}, #{sid,jdbcType=INTEGER}, 
+      #{eid,jdbcType=INTEGER}, #{objective,jdbcType=VARCHAR}, #{step,jdbcType=VARCHAR}, 
+      #{problem,jdbcType=VARCHAR}, #{result,jdbcType=VARCHAR}, #{summary,jdbcType=VARCHAR}, 
+      #{remarks,jdbcType=VARCHAR}, #{readStatus,jdbcType=TINYINT}, #{status,jdbcType=TINYINT}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+    <insert id="insertSelective" parameterType="com.management.model.ExperimentReport">
+        insert into experiment_report
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="erid != null">
+                erid,
+            </if>
+            <if test="cid != null">
+                cid,
+            </if>
+            <if test="sid != null">
+                sid,
+            </if>
+            <if test="eid != null">
+                eid,
+            </if>
+            <if test="objective != null">
+                objective,
+            </if>
+            <if test="step != null">
+                step,
+            </if>
+            <if test="problem != null">
+                problem,
+            </if>
+            <if test="result != null">
+                result,
+            </if>
+            <if test="summary != null">
+                summary,
+            </if>
+            <if test="remarks != null">
+                remarks,
+            </if>
+            <if test="readStatus != null">
+                read_status,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="erid != null">
+                #{erid,jdbcType=INTEGER},
+            </if>
+            <if test="cid != null">
+                #{cid,jdbcType=INTEGER},
+            </if>
+            <if test="sid != null">
+                #{sid,jdbcType=INTEGER},
+            </if>
+            <if test="eid != null">
+                #{eid,jdbcType=INTEGER},
+            </if>
+            <if test="objective != null">
+                #{objective,jdbcType=VARCHAR},
+            </if>
+            <if test="step != null">
+                #{step,jdbcType=VARCHAR},
+            </if>
+            <if test="problem != null">
+                #{problem,jdbcType=VARCHAR},
+            </if>
+            <if test="result != null">
+                #{result,jdbcType=VARCHAR},
+            </if>
+            <if test="summary != null">
+                #{summary,jdbcType=VARCHAR},
+            </if>
+            <if test="remarks != null">
+                #{remarks,jdbcType=VARCHAR},
+            </if>
+            <if test="readStatus != null">
+                #{readStatus,jdbcType=TINYINT},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=TINYINT},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.management.model.ExperimentReport">
+        update experiment_report
+        <set>
+            <if test="cid != null">
+                cid = #{cid,jdbcType=INTEGER},
+            </if>
+            <if test="sid != null">
+                sid = #{sid,jdbcType=INTEGER},
+            </if>
+            <if test="eid != null">
+                eid = #{eid,jdbcType=INTEGER},
+            </if>
+            <if test="objective != null">
+                objective = #{objective,jdbcType=VARCHAR},
+            </if>
+            <if test="step != null">
+                step = #{step,jdbcType=VARCHAR},
+            </if>
+            <if test="problem != null">
+                problem = #{problem,jdbcType=VARCHAR},
+            </if>
+            <if test="result != null">
+                result = #{result,jdbcType=VARCHAR},
+            </if>
+            <if test="summary != null">
+                summary = #{summary,jdbcType=VARCHAR},
+            </if>
+            <if test="remarks != null">
+                remarks = #{remarks,jdbcType=VARCHAR},
+            </if>
+            <if test="readStatus != null">
+                read_status = #{readStatus,jdbcType=TINYINT},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=TINYINT},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where erid = #{erid,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.management.model.ExperimentReport">
+    update experiment_report
+    set cid = #{cid,jdbcType=INTEGER},
+      sid = #{sid,jdbcType=INTEGER},
+      eid = #{eid,jdbcType=INTEGER},
+      objective = #{objective,jdbcType=VARCHAR},
+      step = #{step,jdbcType=VARCHAR},
+      problem = #{problem,jdbcType=VARCHAR},
+      result = #{result,jdbcType=VARCHAR},
+      summary = #{summary,jdbcType=VARCHAR},
+      remarks = #{remarks,jdbcType=VARCHAR},
+      read_status = #{readStatus,jdbcType=TINYINT},
+      status = #{status,jdbcType=TINYINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where erid = #{erid,jdbcType=INTEGER}
+  </update>
+</mapper>

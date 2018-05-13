@@ -3,6 +3,7 @@ package com.management.common;/**
  */
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * @author jiajia
@@ -18,4 +19,6 @@ public interface BaseService<T> {
     int update(T t);
 
     T get(Serializable id);
+
+    List<T> getAll();
 }

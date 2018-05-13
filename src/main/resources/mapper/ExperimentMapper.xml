@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.management.dao.ExperimentDao">
+    <resultMap id="BaseResultMap" type="com.management.model.Experiment">
+        <id column="eid" jdbcType="INTEGER" property="eid"/>
+        <result column="cid" jdbcType="INTEGER" property="cid"/>
+        <result column="gid" jdbcType="INTEGER" property="gid"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="outline" jdbcType="VARCHAR" property="outline"/>
+        <result column="time" jdbcType="TIMESTAMP" property="time"/>
+        <result column="place" jdbcType="VARCHAR" property="place"/>
+        <result column="status" jdbcType="TINYINT" property="status"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+    </resultMap>
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.management.model.Experiment">
+        <result column="content" jdbcType="LONGVARCHAR" property="content"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        eid, cid, gid, name, outline, time, place, status, create_time, update_time
+    </sql>
+    <sql id="Blob_Column_List">
+        content
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from experiment
+        where eid = #{eid,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from experiment
+        where eid = #{eid,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.management.model.Experiment">
+        insert into experiment (eid, cid, gid,
+        name, outline, time,
+        place, status, create_time,
+        update_time, content)
+        values (#{eid,jdbcType=INTEGER}, #{cid,jdbcType=INTEGER}, #{gid,jdbcType=INTEGER},
+        #{name,jdbcType=VARCHAR}, #{outline,jdbcType=VARCHAR}, #{time,jdbcType=TIMESTAMP},
+        #{place,jdbcType=VARCHAR}, #{status,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP},
+        #{updateTime,jdbcType=TIMESTAMP}, #{content,jdbcType=LONGVARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.management.model.Experiment">
+        insert into experiment
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="eid != null">
+                eid,
+            </if>
+            <if test="cid != null">
+                cid,
+            </if>
+            <if test="gid != null">
+                gid,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="outline != null">
+                outline,
+            </if>
+            <if test="time != null">
+                time,
+            </if>
+            <if test="place != null">
+                place,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="content != null">
+                content,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="eid != null">
+                #{eid,jdbcType=INTEGER},
+            </if>
+            <if test="cid != null">
+                #{cid,jdbcType=INTEGER},
+            </if>
+            <if test="gid != null">
+                #{gid,jdbcType=INTEGER},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="outline != null">
+                #{outline,jdbcType=VARCHAR},
+            </if>
+            <if test="time != null">
+                #{time,jdbcType=TIMESTAMP},
+            </if>
+            <if test="place != null">
+                #{place,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=TINYINT},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="content != null">
+                #{content,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.management.model.Experiment">
+        update experiment
+        <set>
+            <if test="cid != null">
+                cid = #{cid,jdbcType=INTEGER},
+            </if>
+            <if test="gid != null">
+                gid = #{gid,jdbcType=INTEGER},
+            </if>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="outline != null">
+                outline = #{outline,jdbcType=VARCHAR},
+            </if>
+            <if test="time != null">
+                time = #{time,jdbcType=TIMESTAMP},
+            </if>
+            <if test="place != null">
+                place = #{place,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=TINYINT},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="content != null">
+                content = #{content,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where eid = #{eid,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.management.model.Experiment">
+        update experiment
+        set cid = #{cid,jdbcType=INTEGER},
+        gid = #{gid,jdbcType=INTEGER},
+        name = #{name,jdbcType=VARCHAR},
+        outline = #{outline,jdbcType=VARCHAR},
+        time = #{time,jdbcType=TIMESTAMP},
+        place = #{place,jdbcType=VARCHAR},
+        status = #{status,jdbcType=TINYINT},
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+        content = #{content,jdbcType=LONGVARCHAR}
+        where eid = #{eid,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.management.model.Experiment">
+        update experiment
+        set cid = #{cid,jdbcType=INTEGER},
+        gid = #{gid,jdbcType=INTEGER},
+        name = #{name,jdbcType=VARCHAR},
+        outline = #{outline,jdbcType=VARCHAR},
+        time = #{time,jdbcType=TIMESTAMP},
+        place = #{place,jdbcType=VARCHAR},
+        status = #{status,jdbcType=TINYINT},
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+        update_time = #{updateTime,jdbcType=TIMESTAMP}
+        where eid = #{eid,jdbcType=INTEGER}
+    </update>
+</mapper>

@@ -18,9 +18,11 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.PostConstruct;
 import java.util.Collections;
+import java.util.Date;
 
 /**
  * @author jiajia
@@ -61,8 +63,19 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
         SecurityContextHolder.getContext().setAuthentication(authenticate(user));
     }
 
+    @Transactional
+    @Override
+    public User createNewUser(User userParam) {
+        userParam.setCreateTime(new Date());
+        userParam.setDeleteStatus(1);
+        userParam.setStatus(1);
+        userParam.setUpdateTime(new Date());
+        userParam.setUserName(userParam.getLoginName());
+        return save(userParam);
+    }
+
     private Authentication authenticate(User user) {
-        return new UsernamePasswordAuthenticationToken(createUser(user), null, Collections.singleton(createAuthority(user)));
+        return new UsernamePasswordAuthenticationToken(createNewUser(user), null, Collections.singleton(createAuthority(user)));
     }
 
     @Override

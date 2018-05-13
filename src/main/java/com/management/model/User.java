@@ -1,7 +1,5 @@
 package com.management.model;
 
-import org.thymeleaf.util.DateUtils;
-
 import java.util.Date;
 
 public class User {
@@ -44,8 +42,8 @@ public class User {
         this.userName = loginName;
         this.passwd = passwd;
         this.role = role;
-        this.createTime = DateUtils.createNow().getTime();
-        this.updateTime = DateUtils.createNow().getTime();
+        this.createTime = new Date();
+        this.updateTime = new Date();
         this.status = 1;
         this.deleteStatus = 1;
     }
