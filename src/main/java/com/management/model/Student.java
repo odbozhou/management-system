@@ -9,9 +9,9 @@ public class Student {
 
     private String name;
 
-    private Byte sex;
+    private Integer sex;
 
-    private Integer gradeId;
+    private Integer gid;
 
     private String phone;
 
@@ -47,20 +47,20 @@ public class Student {
         this.name = name == null ? null : name.trim();
     }
 
-    public Byte getSex() {
+    public Integer getSex() {
         return sex;
     }
 
-    public void setSex(Byte sex) {
+    public void setSex(Integer sex) {
         this.sex = sex;
     }
 
-    public Integer getGradeId() {
-        return gradeId;
+    public Integer getGid() {
+        return gid;
     }
 
-    public void setGradeId(Integer gradeId) {
-        this.gradeId = gradeId;
+    public void setGid(Integer gid) {
+        this.gid = gid;
     }
 
     public String getPhone() {

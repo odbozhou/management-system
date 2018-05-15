@@ -11,23 +11,17 @@
     <sql id="Base_Column_List">
     cid, name, status, create_time, update_time
   </sql>
-    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <select id="get" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from course
         where cid = #{cid,jdbcType=INTEGER}
     </select>
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <delete id="delete" parameterType="java.lang.Integer">
     delete from course
     where cid = #{cid,jdbcType=INTEGER}
   </delete>
     <insert id="insert" parameterType="com.management.model.Course">
-    insert into course (cid, name, status, 
-      create_time, update_time)
-    values (#{cid,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{status,jdbcType=TINYINT}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
-  </insert>
-    <insert id="insertSelective" parameterType="com.management.model.Course">
         insert into course
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="cid != null">
@@ -64,7 +58,7 @@
             </if>
         </trim>
     </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.management.model.Course">
+    <update id="update" parameterType="com.management.model.Course">
         update course
         <set>
             <if test="name != null">
@@ -82,14 +76,6 @@
         </set>
         where cid = #{cid,jdbcType=INTEGER}
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.management.model.Course">
-    update course
-    set name = #{name,jdbcType=VARCHAR},
-      status = #{status,jdbcType=TINYINT},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      update_time = #{updateTime,jdbcType=TIMESTAMP}
-    where cid = #{cid,jdbcType=INTEGER}
-  </update>
     <select id="getAll" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>

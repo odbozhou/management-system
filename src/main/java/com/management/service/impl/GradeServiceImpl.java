@@ -4,9 +4,9 @@ package com.management.service.impl;/**
 
 import com.management.common.BaseDao;
 import com.management.common.BaseServiceImpl;
-import com.management.dao.CourseDao;
-import com.management.model.Course;
-import com.management.service.CourseService;
+import com.management.dao.GradeDao;
+import com.management.model.Grade;
+import com.management.service.GradeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,21 +19,21 @@ import java.util.List;
  * @date 2018/5/9 23:29
  */
 @Service
-public class CourseServiceImpl extends BaseServiceImpl<Course> implements CourseService {
+public class GradeServiceImpl extends BaseServiceImpl<Grade> implements GradeService {
     @Autowired
-    private CourseDao courseDao;
+    private GradeDao gradeDao;
 
-    public List<Course> list() {
-        return courseDao.getAll();
+    public List<Grade> list() {
+        return gradeDao.getAll();
     }
 
     @Override
-    public BaseDao<Course> getDao() {
-        return courseDao;
+    public BaseDao<Grade> getDao() {
+        return gradeDao;
     }
 
     @Override
-    public List<Course> getAll() {
-        return courseDao.getAll();
+    public List<Grade> getAll() {
+        return gradeDao.getAll();
     }
 }

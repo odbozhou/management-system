@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <!--/* Title of this template will be passed to the head fragment along with custom links and scripts */-->
-<head th:replace="teacher/layout :: head(~{this :: title}, ~{this :: .custom-link}, ~{this :: .custom-script})">
-    <title>Teacher Details</title>
+<head th:replace="fragments/layout :: head(~{this :: title}, ~{this :: .custom-link}, ~{this :: .custom-script})">
+    <title>Grade Details</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link href="../../static/css/bootstrap.min.css" rel="stylesheet" media="screen"
           th:href="@{/css/bootstrap.min.css}"/>
@@ -21,21 +21,22 @@
 <body>
 
 <!--/* The element with breadcrumb class will be passed to the header fragment */-->
-<header th:insert="teacher/layout :: header(~{ :: .breadcrumb})">
+<header th:insert="fragments/layout :: header(~{ :: .breadcrumb})">
     <ol class="breadcrumb container">
         <li><a href="#" th:href="@{/}">Home</a></li>
-        <li><a href="#" th:href="@{/teacher}">Teachers</a></li>
-        <li th:text="${'Teacher ' + teacher.tid}">Teacher</li>
+        <li><a href="#" th:href="@{/grade}">Grades</a></li>
+        <li th:text="${'Grade ' + grade.gid}">Grade</li>
     </ol>
 </header>
 
-<!--/* Insert content fragment with content of the element with id = 'teacher-details' */-->
-<div th:insert="teacher/layout :: content(~{ :: #teacher-details})">
-    <div id="teacher-details">
+<!--/* Insert content fragment with content of the element with id = 'grade-details' */-->
+<div th:insert="fragments/layout :: content(~{ :: #grade-details})">
+    <div id="grade-details">
 
-        <h2 th:text="${teacher.tid}">Teacher Details</h2>
-        <div th:text="${teacher.name}">Name</div>
+        <h2 th:text="${grade.gid}">Grade Details</h2>
+        <div th:text="${grade.name}">Name</div>
     </div>
 </div>
+
 </body>
 </html>

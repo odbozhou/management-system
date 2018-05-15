@@ -13,31 +13,14 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">My project</a>
+            <a class="navbar-brand" href="#" th:href="@{/}">My project</a>
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-   <!--             <li th:classappend="${module == 'home' ? 'active' : ''}">
-                    <a href="#" th:href="@{/}">Home</a>
-                </li>-->
-               <!-- <li th:classappend="${module == 'tasks' ? 'active' : ''}">
-                    <a href="#" th:href="@{/task}">Tasks</a>
-                </li>
-                <li th:classappend="${module == 'tasks-ld' ? 'active' : ''}">
-                    <a href="#" th:href="@{/task-ld}">Tasks (Layout Dialect)</a>
-                </li>-->
-
-
-
                 <tr th:each="menus : ${menus}">
                     <li th:classappend="${module == menus.module ? 'active' : ''}">
                         <a href="#" th:href="${menus.url}"> <span th:text="${menus.name}"/></a>
                     </li>
-
-                   <!-- <td th:text="${menus.name}">1</td>
-                    <td>
-                        <a href="#" th:href="@{/{url}(url=${menus.url})}" th:text="${task.title}">Title ...</a>
-                    </td>-->
                 </tr>
             </ul>
             <ul class="nav navbar-nav navbar-right">

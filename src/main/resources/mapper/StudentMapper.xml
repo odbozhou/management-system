@@ -6,7 +6,7 @@
         <result column="sno" jdbcType="VARCHAR" property="sno"/>
         <result column="name" jdbcType="VARCHAR" property="name"/>
         <result column="sex" jdbcType="TINYINT" property="sex"/>
-        <result column="grade_id" jdbcType="INTEGER" property="gradeId"/>
+        <result column="gid" jdbcType="INTEGER" property="gid"/>
         <result column="phone" jdbcType="VARCHAR" property="phone"/>
         <result column="email" jdbcType="VARCHAR" property="email"/>
         <result column="user_id" jdbcType="INTEGER" property="userId"/>
@@ -14,13 +14,18 @@
         <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
     </resultMap>
     <sql id="Base_Column_List">
-    sid, sno, name, sex, grade_id, phone, email, user_id, create_time, update_time
+        sid, sno, name, sex, gid, phone, email, user_id, create_time, update_time
   </sql>
     <select id="get" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from student
         where sid = #{sid,jdbcType=INTEGER}
+    </select>
+    <select id="getAll" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from student
     </select>
     <delete id="delete" parameterType="java.lang.Integer">
     delete from student
@@ -41,8 +46,8 @@
             <if test="sex != null">
                 sex,
             </if>
-            <if test="gradeId != null">
-                grade_id,
+            <if test="gid != null">
+                gid,
             </if>
             <if test="phone != null">
                 phone,
@@ -73,8 +78,8 @@
             <if test="sex != null">
                 #{sex,jdbcType=TINYINT},
             </if>
-            <if test="gradeId != null">
-                #{gradeId,jdbcType=INTEGER},
+            <if test="gid != null">
+                #{gid,jdbcType=INTEGER},
             </if>
             <if test="phone != null">
                 #{phone,jdbcType=VARCHAR},
@@ -83,7 +88,7 @@
                 #{email,jdbcType=VARCHAR},
             </if>
             <if test="userId != null">
-                #{user_id,jdbcType=INTEGER},
+                #{userId,jdbcType=INTEGER},
             </if>
             <if test="createTime != null">
                 #{createTime,jdbcType=TIMESTAMP},
@@ -105,8 +110,8 @@
             <if test="sex != null">
                 sex = #{sex,jdbcType=TINYINT},
             </if>
-            <if test="gradeId != null">
-                grade_id = #{gradeId,jdbcType=INTEGER},
+            <if test="gid != null">
+                gid = #{gid,jdbcType=INTEGER},
             </if>
             <if test="phone != null">
                 phone = #{phone,jdbcType=VARCHAR},

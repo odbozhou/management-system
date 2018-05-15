@@ -79,6 +79,7 @@ public class TeacherServiceImpl extends BaseServiceImpl<Teacher> implements Teac
             if (!user.getLoginName().equals(teacher.getPhone())) {
                 user.setLoginName(teacher.getPhone());
                 user.setUserName(teacher.getPhone());
+                user.setUpdateTime(new Date());
                 userService.update(user);
             }
         }

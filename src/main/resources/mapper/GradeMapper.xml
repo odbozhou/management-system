@@ -10,23 +10,22 @@
     <sql id="Base_Column_List">
         gid, name, create_time, update_time
     </sql>
-    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <select id="get" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from grade
         where gid = #{gid,jdbcType=INTEGER}
     </select>
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <select id="getAll" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from grade
+    </select>
+    <delete id="delete" parameterType="java.lang.Integer">
         delete from grade
         where gid = #{gid,jdbcType=INTEGER}
     </delete>
     <insert id="insert" parameterType="com.management.model.Grade">
-        insert into grade (gid, name, create_time,
-        update_time)
-        values (#{gid,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP},
-        #{updateTime,jdbcType=TIMESTAMP})
-    </insert>
-    <insert id="insertSelective" parameterType="com.management.model.Grade">
         insert into grade
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="gid != null">
@@ -57,7 +56,7 @@
             </if>
         </trim>
     </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.management.model.Grade">
+    <update id="update" parameterType="com.management.model.Grade">
         update grade
         <set>
             <if test="name != null">
@@ -70,13 +69,6 @@
                 update_time = #{updateTime,jdbcType=TIMESTAMP},
             </if>
         </set>
-        where gid = #{gid,jdbcType=INTEGER}
-    </update>
-    <update id="updateByPrimaryKey" parameterType="com.management.model.Grade">
-        update grade
-        set name = #{name,jdbcType=VARCHAR},
-        create_time = #{createTime,jdbcType=TIMESTAMP},
-        update_time = #{updateTime,jdbcType=TIMESTAMP}
         where gid = #{gid,jdbcType=INTEGER}
     </update>
 </mapper>
