@@ -130,6 +130,10 @@ CREATE TABLE IF NOT EXISTS `user` (
   UNIQUE KEY `uniq_login_name` (`login_name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户表';
 
+INSERT INTO `user` (`user_id`, `login_name`, `user_name`, `passwd`, `role`, `status`, `delete_status`, `create_time`, `update_time`) VALUES
+	(1, 'student', 'student', '$2a$10$XPSKuiUlBx2qnYy88m60KOMGTrTmM90ne8ULxkcQMgJeNOBUQm5wW', 'ROLE_STUDENT', 1, 1, '2018-05-13 15:09:36', '2018-05-13 15:09:36'),
+	(2, 'teacher', 'teacher', '$2a$10$md6ir3r.tDakeAqmvUyLme./oYOmnm6B0bk90L2HRVZVjvHl26V32', 'ROLE_TEACHER', 1, 1, '2018-05-13 15:09:37', '2018-05-13 15:09:37'),
+	(3, 'admin', 'admin', '$2a$10$1Z7jvGJhbTbbd3vHBI9HtuuEuL4bhabxrYoexfPmvKEFcIYdbXO6W', 'ROLE_ADMIN', 1, 1, '2018-05-13 15:09:37', '2018-05-13 15:09:37');
 -- 数据导出被取消选择。
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
