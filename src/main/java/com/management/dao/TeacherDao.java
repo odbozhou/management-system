@@ -6,4 +6,5 @@ import org.springframework.stereotype.Component;
 
 @Component
 public interface TeacherDao extends BaseDao<Teacher> {
+    Teacher getByPhone(String phone);
 }

@@ -20,7 +20,7 @@ import java.util.Date;
 /**
  * @author jiajia
  * @version V1.0
- * @Description: 教师
+ * @Description: 学生
  * @date 2018/5/13 16:42
  */
 

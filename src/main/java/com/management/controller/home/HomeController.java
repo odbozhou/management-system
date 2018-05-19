@@ -66,11 +66,54 @@ class HomeController {
                 menus.add(menu2);
                 menus.add(menu3);
                 model.addAttribute("menus", menus);
-
                 return "home/adminHomeSignedIn";
             } else if ("ROLE_TEACHER".equals(grantedAuthority.getAuthority())) {
+                List<Menu> menus = new ArrayList<>(16);
+                Menu menu = new Menu();
+                menu.setName("Home");
+                menu.setUrl("/");
+                menu.setModule("home");
+                Menu menu1 = new Menu();
+                menu1.setName("实验管理");
+                menu1.setUrl("/experiment");
+                menu1.setModule("experiment");
+                Menu menu2 = new Menu();
+                menu2.setName("实验报告管理");
+                menu2.setUrl("/experimentReport");
+                menu2.setModule("experimentReport");
+                Menu menu3 = new Menu();
+                menu3.setName("个人信息");
+                menu3.setUrl("/userInfo");
+                menu3.setModule("userInfo");
+                menus.add(menu);
+                menus.add(menu1);
+                menus.add(menu2);
+                menus.add(menu3);
+                model.addAttribute("menus", menus);
                 return "home/teacherHomeSignedIn";
             } else if ("ROLE_STUDENT".equals(grantedAuthority.getAuthority())) {
+                List<Menu> menus = new ArrayList<>(16);
+                Menu menu = new Menu();
+                menu.setName("Home");
+                menu.setUrl("/");
+                menu.setModule("home");
+                Menu menu1 = new Menu();
+                menu1.setName("实验管理");
+                menu1.setUrl("/experiment");
+                menu1.setModule("experiment");
+                Menu menu2 = new Menu();
+                menu2.setName("实验报告管理");
+                menu2.setUrl("/experimentReport");
+                menu2.setModule("experimentReport");
+                Menu menu3 = new Menu();
+                menu3.setName("个人信息");
+                menu3.setUrl("/userInfo");
+                menu3.setModule("userInfo");
+                menus.add(menu);
+                menus.add(menu1);
+                menus.add(menu2);
+                menus.add(menu3);
+                model.addAttribute("menus", menus);
                 return "home/studentHomeSignedIn";
             }
         }

@@ -19,6 +19,12 @@
         from teacher
         where tid = #{tid,jdbcType=INTEGER}
     </select>
+    <select id="getByPhone" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from teacher
+        where phone = #{phone,jdbcType=VARCHAR}
+    </select>
     <select id="getAll" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>

@@ -30,7 +30,7 @@
             </div>
         </th:block>
         <fieldset>
-            <legend>更新教师信息</legend>
+            <legend>更新学生信息</legend>
             <input type="text" id="sid" hidden="hidden" th:field="*{sid}"/>
 
             <div class="form-group" th:classappend="${#fields.hasErrors('sno')}? 'has-error'">
@@ -51,11 +51,12 @@
                 </div>
             </div>
 
-            <div class="form-group" th:classappend="${#fields.hasErrors('sex')}? 'has-error'">
+            <div class="form-group" th:classappend="${#fields.hasErrors('gid')}? 'has-error'">
                 <label for="sex" class="col-lg-2 control-label">班级</label>
                 <div class="col-lg-10">
                     <select class="form-control" id="gid" th:field="*{gid}">
-                        <option th:each="grade : ${grades}" th:value="${grade.gid}"><span th:text="${grade.name}"/>
+                        <option th:each="grade : ${#dates.create()grades}" th:value="${grade.gid}"><span
+                                th:text="${grade.name}"/>
                         </option>
                     </select>
                 </div>

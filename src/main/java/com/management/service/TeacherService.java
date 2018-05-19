@@ -13,4 +13,6 @@ public interface TeacherService extends BaseService<Teacher> {
     int remove(Integer id);
 
     void renew(Teacher teacher);
+
+    Teacher getByPhone(String userName);
 }

@@ -9,7 +9,21 @@ public class ExperimentReport {
 
     private Integer sid;
 
+    private Integer sno;
+
+    private String studentName;
+
     private Integer eid;
+
+    private String experimentName;
+
+    private String outline;
+
+    private Date time;
+
+    private String place;
+
+    private String content;
 
     private String objective;
 
@@ -55,12 +69,68 @@ public class ExperimentReport {
         this.sid = sid;
     }
 
+    public Integer getSno() {
+        return sno;
+    }
+
+    public void setSno(Integer sno) {
+        this.sno = sno;
+    }
+
+    public String getStudentName() {
+        return studentName;
+    }
+
+    public void setStudentName(String studentName) {
+        this.studentName = studentName;
+    }
+
     public Integer getEid() {
         return eid;
     }
 
     public void setEid(Integer eid) {
         this.eid = eid;
+    }
+
+    public String getExperimentName() {
+        return experimentName;
+    }
+
+    public void setExperimentName(String experimentName) {
+        this.experimentName = experimentName;
+    }
+
+    public String getOutline() {
+        return outline;
+    }
+
+    public void setOutline(String outline) {
+        this.outline = outline;
+    }
+
+    public Date getTime() {
+        return time;
+    }
+
+    public void setTime(Date time) {
+        this.time = time;
+    }
+
+    public String getPlace() {
+        return place;
+    }
+
+    public void setPlace(String place) {
+        this.place = place;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
     }
 
     public String getObjective() {

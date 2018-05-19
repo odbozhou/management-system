@@ -1,9 +1,15 @@
 package com.management.model;
 
+import org.springframework.util.StringUtils;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Experiment {
     private Integer eid;
+
+    private Integer tid;
 
     private Integer cid;
 
@@ -15,9 +21,11 @@ public class Experiment {
 
     private Date time;
 
+    private String timeString;
+
     private String place;
 
-    private Byte status;
+    private Integer status;
 
     private Date createTime;
 
@@ -31,6 +39,14 @@ public class Experiment {
 
     public void setEid(Integer eid) {
         this.eid = eid;
+    }
+
+    public Integer getTid() {
+        return tid;
+    }
+
+    public void setTid(Integer tid) {
+        this.tid = tid;
     }
 
     public Integer getCid() {
@@ -66,6 +82,15 @@ public class Experiment {
     }
 
     public Date getTime() {
+        if (StringUtils.isEmpty(timeString)) {
+            return time;
+        }
+        SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        try {
+            this.time = sDateFormat.parse(getTimeString());
+        } catch (ParseException e) {
+            throw new RuntimeException(e.getMessage());
+        }
         return time;
     }
 
@@ -81,11 +106,11 @@ public class Experiment {
         this.place = place == null ? null : place.trim();
     }
 
-    public Byte getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(Byte status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 
@@ -111,5 +136,18 @@ public class Experiment {
 
     public void setContent(String content) {
         this.content = content == null ? null : content.trim();
+    }
+
+    public String getTimeString() {
+        if (null == time) {
+            return timeString;
+        }
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        this.timeString = simpleDateFormat.format(time);
+        return timeString;
+    }
+
+    public void setTimeString(String timeString) {
+        this.timeString = timeString;
     }
 }

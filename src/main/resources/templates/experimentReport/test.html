@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<div class="form-group" th:classappend="${#fields.hasErrors('summary')}? 'has-error'">
+    <label for="summary" class="col-lg-2 control-label">内容</label>
+    <div class="col-lg-10">
+        <input type="text" class="form-control input-lg" id="summary" placeholder="Content" th:field="*{summary}"/>
+        <span class="help-block" th:if="${#fields.hasErrors('summary')}"
+              th:errors="*{summary}">Incorrect summary</span>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!--/* Title of this template will be passed to the head fragment along with custom links and scripts */-->
+<head th:replace="experimentReport/layout :: head(~{this :: title}, ~{this :: .custom-link}, ~{this :: .custom-script})">
+    <title>ExperimentReport Details</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="../../static/css/bootstrap.min.css" rel="stylesheet" media="screen"
+          th:href="@{/css/bootstrap.min.css}"/>
+    <link href="../../static/css/core.css" rel="stylesheet" media="screen" th:href="@{/css/core.css}"/>
+
+    <!-- Custom links for this page only -->
+    <link class="custom-link" href="../../static/css/custom/custom.css" th:href="@{/css/custom/custom.css}"/>
+
+    <script src="../../static/js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
+    <script src="../../static/js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
+
+    <!-- Custom scripts for this page only -->
+    <script class="custom-script" src="../../static/js/custom/custom.js" th:src="@{/js/custom/custom.js}"></script>
+
+</head>
+<body>
+
+<div class="container">
+    <form class="form-narrow form-horizontal" method="post" th:action="@{/experimentReport/update}"
+          th:object="${experimentReport}"
+          th:fragment="experimentReportForm">
+        <!--/* Show general error message when form contains errors */-->
+        <th:block th:if="${#fields.hasErrors('${experimentReport.*}')}">
+            <div th:replace="fragments/alert :: alert (type='danger', message='Form contains errors. Please try again.')">
+                Alert
+            </div>
+        </th:block>
+        <fieldset>
+            <legend>更新实验报告</legend>
+            <input type="text" id="erid" hidden="hidden" th:field="*{erid}"/>
+
+            <div class="form-group" th:classappend="${#fields.hasErrors('cid')}? 'has-error'">
+                <label for="cid" class="col-lg-2 control-label">课程</label>
+                <div class="col-lg-10">
+                    <select class="form-control" id="cid" th:field="*{cid}">
+                        <option th:each="course : ${courses}" th:value="${course.cid}"><span th:text="${course.name}"/>
+                        </option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group" th:classappend="${#fields.hasErrors('gid')}? 'has-error'">
+                <label for="gid" class="col-lg-2 control-label">班级</label>
+                <div class="col-lg-10">
+                    <select class="form-control" id="gid" th:field="*{gid}">
+                        <option th:each="grade : ${grades}" th:value="${grade.gid}"><span th:text="${grade.name}"/>
+                        </option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group" th:classappend="${#fields.hasErrors('name')}? 'has-error'">
+                <label for="name" class="col-lg-2 control-label">名称</label>
+                <div class="col-lg-10">
+                    <input type="text" class="form-control" id="name" placeholder="Name" th:field="*{name}"/>
+                    <span class="help-block" th:if="${#fields.hasErrors('name')}"
+                          th:errors="*{name}">Incorrect name</span>
+                </div>
+            </div>
+
+            <div class="form-group" th:classappend="${#fields.hasErrors('outline')}? 'has-error'">
+                <label for="outline" class="col-lg-2 control-label">大纲</label>
+                <div class="col-lg-10">
+                    <input type="text" class="form-control input-lg" id="outline" placeholder="Outline"
+                           th:field="*{outline}"/>
+                    <span class="help-block" th:if="${#fields.hasErrors('outline')}"
+                          th:errors="*{outline}">Incorrect outline</span>
+                </div>
+            </div>
+
+            <div class="form-group" th:classappend="${#fields.hasErrors('content')}? 'has-error'">
+                <label for="content" class="col-lg-2 control-label">内容</label>
+                <div class="col-lg-10">
+                    <input type="text" class="form-control input-lg" id="content" placeholder="Content"
+                           th:field="*{content}"/>
+                    <span class="help-block" th:if="${#fields.hasErrors('content')}"
+                          th:errors="*{content}">Incorrect content</span>
+                </div>
+            </div>
+
+            <div class="form-group" th:classappend="${#fields.hasErrors('timeString')}? 'has-error'">
+                <label for="timeString" class="col-lg-2 control-label">时间</label>
+                <div class="input-group date form_datetime col-md-10" data-link-field="timeString">
+                    <input class="form-control" size="16" type="text" value="" readonly>
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                    <span class="help-block" th:if="${#fields.hasErrors('timeString')}" th:errors="*{timeString}">Incorrect time</span>
+                </div>
+                <input type="hidden" id="timeString" value="" th:field="*{timeString}"/><br/>
+            </div>
+
+            <div class="form-group" th:classappend="${#fields.hasErrors('place')}? 'has-error'">
+                <label for="place" class="col-lg-2 control-label">地点</label>
+                <div class="col-lg-10">
+                    <input type="text" class="form-control" id="place" placeholder="Place" th:field="*{place}"/>
+                    <span class="help-block" th:if="${#fields.hasErrors('place')}"
+                          th:errors="*{place}">Incorrect place</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-lg-offset-2 col-lg-10">
+                    <button type="submit" class="btn btn-default">保存</button>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div>
+
+</body>
+</html>

@@ -85,4 +85,9 @@ public class TeacherServiceImpl extends BaseServiceImpl<Teacher> implements Teac
         }
         update(teacher);
     }
+
+    @Override
+    public Teacher getByPhone(String phone) {
+        return teacherDao.getByPhone(phone);
+    }
 }

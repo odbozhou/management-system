@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * @author jiajia
  * @version V1.0
- * @Description: 课程业务实现
+ * @Description: 班级业务实现
  * @date 2018/5/9 23:29
  */
 @Service
