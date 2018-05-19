@@ -11,6 +11,10 @@ public class User {
 
     private String passwd;
 
+    private String newpasswd;
+
+    private String repasswd;
+
     private String role;
 
     private Integer status;
@@ -78,6 +82,22 @@ public class User {
 
     public void setPasswd(String passwd) {
         this.passwd = passwd == null ? null : passwd.trim();
+    }
+
+    public String getNewpasswd() {
+        return newpasswd;
+    }
+
+    public void setNewpasswd(String newpasswd) {
+        this.newpasswd = newpasswd;
+    }
+
+    public String getRepasswd() {
+        return repasswd;
+    }
+
+    public void setRepasswd(String repasswd) {
+        this.repasswd = repasswd;
     }
 
     public String getRole() {

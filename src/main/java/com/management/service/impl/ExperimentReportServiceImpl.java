@@ -36,4 +36,14 @@ public class ExperimentReportServiceImpl extends BaseServiceImpl<ExperimentRepor
     public List<ExperimentReport> getAll() {
         return experimentReportDao.getAll();
     }
+
+    @Override
+    public List<ExperimentReport> listByEids(List<Integer> eids) {
+        return experimentReportDao.listByEids(eids);
+    }
+
+    @Override
+    public List<ExperimentReport> listBySid(Integer sid) {
+        return experimentReportDao.listBySid(sid);
+    }
 }

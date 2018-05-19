@@ -37,9 +37,9 @@ public class ExperimentReport {
 
     private String remarks;
 
-    private Byte readStatus;
+    private Integer readStatus;
 
-    private Byte status;
+    private Integer status;
 
     private Date createTime;
 
@@ -181,19 +181,19 @@ public class ExperimentReport {
         this.remarks = remarks == null ? null : remarks.trim();
     }
 
-    public Byte getReadStatus() {
+    public Integer getReadStatus() {
         return readStatus;
     }
 
-    public void setReadStatus(Byte readStatus) {
+    public void setReadStatus(Integer readStatus) {
         this.readStatus = readStatus;
     }
 
-    public Byte getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(Byte status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 

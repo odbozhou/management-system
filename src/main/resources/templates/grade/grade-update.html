@@ -19,6 +19,12 @@
 
 </head>
 <body>
+<header th:insert="fragments/layout :: header(~{ :: .breadcrumb})">
+    <ol class="breadcrumb container">
+        <li><a href="#" th:href="@{/}">Home</a></li>
+        <li><a href="#">Grades</a></li>
+    </ol>
+</header>
 
 <div class="container">
     <form class="form-narrow form-horizontal" method="post" th:action="@{/grade/update}" th:object="${grade}"

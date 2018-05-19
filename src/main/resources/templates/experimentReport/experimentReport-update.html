@@ -20,6 +20,14 @@
 </head>
 <body>
 
+<header th:insert="fragments/layout :: header(~{ :: .breadcrumb})">
+    <ol class="breadcrumb container">
+        <li><a href="#" th:href="@{/}">Home</a></li>
+        <li><a href="#" th:href="@{/experimentReport}">ExperimentReports</a></li>
+        <li th:text="${'ExperimentReport ' + experimentReport.erid}">ExperimentReport</li>
+    </ol>
+</header>
+
 <div class="container">
     <form class="form-narrow form-horizontal" method="post" th:action="@{/experimentReport/update}"
           th:object="${experimentReport}"
@@ -34,72 +42,143 @@
             <legend>更新实验报告</legend>
             <input type="text" id="erid" hidden="hidden" th:field="*{erid}"/>
 
-            <div class="form-group" th:classappend="${#fields.hasErrors('cid')}? 'has-error'">
-                <label for="cid" class="col-lg-2 control-label">课程</label>
+            <!--   <div class="form-group" th:classappend="${#fields.hasErrors('cid')}? 'has-error'">
+                   <label for="cid" class="col-lg-2 control-label">课程</label>
+                   <div class="col-lg-10">
+                       <select class="form-control" id="cid" th:field="*{cid}">
+                           <option th:each="course : ${courses}" th:value="${course.cid}"><span th:text="${course.name}"/>
+                           </option>
+                       </select>
+                   </div>
+               </div>
+
+               <div class="form-group" th:classappend="${#fields.hasErrors('gid')}? 'has-error'">
+                   <label for="gid" class="col-lg-2 control-label">班级</label>
+                   <div class="col-lg-10">
+                       <select class="form-control" id="gid" th:field="*{gid}">
+                           <option th:each="grade : ${grades}" th:value="${grade.gid}"><span th:text="${grade.name}"/>
+                           </option>
+                       </select>
+                   </div>
+               </div>
+
+               <div class="form-group" th:classappend="${#fields.hasErrors('name')}? 'has-error'">
+                   <label for="name" class="col-lg-2 control-label">名称</label>
+                   <div class="col-lg-10">
+                       <input type="text" class="form-control" id="name" placeholder="Name" th:field="*{name}"/>
+                       <span class="help-block" th:if="${#fields.hasErrors('name')}"
+                             th:errors="*{name}">Incorrect name</span>
+                   </div>
+               </div>
+
+               <div class="form-group" th:classappend="${#fields.hasErrors('outline')}? 'has-error'">
+                   <label for="outline" class="col-lg-2 control-label">大纲</label>
+                   <div class="col-lg-10">
+                       <input type="text" class="form-control input-lg" id="outline" placeholder="Outline"
+                              th:field="*{outline}"/>
+                       <span class="help-block" th:if="${#fields.hasErrors('outline')}"
+                             th:errors="*{outline}">Incorrect outline</span>
+                   </div>
+               </div>
+
+               <div class="form-group" th:classappend="${#fields.hasErrors('content')}? 'has-error'">
+                   <label for="content" class="col-lg-2 control-label">内容</label>
+                   <div class="col-lg-10">
+                       <input type="text" class="form-control input-lg" id="content" placeholder="Content"
+                              th:field="*{content}"/>
+                       <span class="help-block" th:if="${#fields.hasErrors('content')}"
+                             th:errors="*{content}">Incorrect content</span>
+                   </div>
+               </div>
+
+               <div class="form-group" th:classappend="${#fields.hasErrors('timeString')}? 'has-error'">
+                   <label for="timeString" class="col-lg-2 control-label">时间</label>
+                   <div class="input-group date form_datetime col-md-10" data-link-field="timeString">
+                       <input class="form-control" size="16" type="text" value="" readonly>
+                       <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                       <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                       <span class="help-block" th:if="${#fields.hasErrors('timeString')}" th:errors="*{timeString}">Incorrect time</span>
+                   </div>
+                   <input type="hidden" id="timeString" value="" th:field="*{timeString}"/><br/>
+               </div>
+
+               <div class="form-group" th:classappend="${#fields.hasErrors('place')}? 'has-error'">
+                   <label for="place" class="col-lg-2 control-label">地点</label>
+                   <div class="col-lg-10">
+                       <input type="text" class="form-control" id="place" placeholder="Place" th:field="*{place}"/>
+                       <span class="help-block" th:if="${#fields.hasErrors('place')}"
+                             th:errors="*{place}">Incorrect place</span>
+                   </div>
+               </div>
+   -->
+            <div class="form-group" th:classappend="${#fields.hasErrors('eid')}? 'has-error'">
+                <label for="eid" class="col-lg-2 control-label">实验</label>
                 <div class="col-lg-10">
-                    <select class="form-control" id="cid" th:field="*{cid}">
-                        <option th:each="course : ${courses}" th:value="${course.cid}"><span th:text="${course.name}"/>
+                    <select class="form-control" id="eid" th:field="*{eid}">
+                        <option th:each="experiment : ${experiments}" th:value="${experiment.eid}"><span
+                                th:text="${experiment.name}"/>
                         </option>
                     </select>
                 </div>
             </div>
 
-            <div class="form-group" th:classappend="${#fields.hasErrors('gid')}? 'has-error'">
-                <label for="gid" class="col-lg-2 control-label">班级</label>
+            <div class="form-group" th:classappend="${#fields.hasErrors('objective')}? 'has-error'">
+                <label for="objective" class="col-lg-2 control-label">实验目的</label>
                 <div class="col-lg-10">
-                    <select class="form-control" id="gid" th:field="*{gid}">
-                        <option th:each="grade : ${grades}" th:value="${grade.gid}"><span th:text="${grade.name}"/>
-                        </option>
-                    </select>
+                    <input type="text" class="form-control" id="objective" placeholder="Name" th:field="*{objective}"/>
+                    <span class="help-block" th:if="${#fields.hasErrors('objective')}"
+                          th:errors="*{objective}">Incorrect objective</span>
                 </div>
             </div>
 
-            <div class="form-group" th:classappend="${#fields.hasErrors('name')}? 'has-error'">
-                <label for="name" class="col-lg-2 control-label">名称</label>
+            <div class="form-group" th:classappend="${#fields.hasErrors('step')}? 'has-error'">
+                <label for="step" class="col-lg-2 control-label">实验步骤</label>
                 <div class="col-lg-10">
-                    <input type="text" class="form-control" id="name" placeholder="Name" th:field="*{name}"/>
-                    <span class="help-block" th:if="${#fields.hasErrors('name')}"
-                          th:errors="*{name}">Incorrect name</span>
+                    <input type="text" class="form-control input-lg" id="step" placeholder="Outline"
+                           th:field="*{step}"/>
+                    <span class="help-block" th:if="${#fields.hasErrors('step')}"
+                          th:errors="*{step}">Incorrect step</span>
                 </div>
             </div>
 
-            <div class="form-group" th:classappend="${#fields.hasErrors('outline')}? 'has-error'">
-                <label for="outline" class="col-lg-2 control-label">大纲</label>
+            <div class="form-group" th:classappend="${#fields.hasErrors('problem')}? 'has-error'">
+                <label for="problem" class="col-lg-2 control-label">发现的问题</label>
                 <div class="col-lg-10">
-                    <input type="text" class="form-control input-lg" id="outline" placeholder="Outline"
-                           th:field="*{outline}"/>
-                    <span class="help-block" th:if="${#fields.hasErrors('outline')}"
-                          th:errors="*{outline}">Incorrect outline</span>
+                    <input type="text" class="form-control input-lg" id="problem" placeholder="Content"
+                           th:field="*{problem}"/>
+                    <span class="help-block" th:if="${#fields.hasErrors('problem')}"
+                          th:errors="*{problem}">Incorrect problem</span>
                 </div>
             </div>
 
-            <div class="form-group" th:classappend="${#fields.hasErrors('content')}? 'has-error'">
-                <label for="content" class="col-lg-2 control-label">内容</label>
+            <div class="form-group" th:classappend="${#fields.hasErrors('result')}? 'has-error'">
+                <label for="result" class="col-lg-2 control-label">实验结果</label>
                 <div class="col-lg-10">
-                    <input type="text" class="form-control input-lg" id="content" placeholder="Content"
-                           th:field="*{content}"/>
-                    <span class="help-block" th:if="${#fields.hasErrors('content')}"
-                          th:errors="*{content}">Incorrect content</span>
+                    <input type="text" class="form-control input-lg" id="result" placeholder="Content"
+                           th:field="*{result}"/>
+                    <span class="help-block" th:if="${#fields.hasErrors('result')}"
+                          th:errors="*{result}">Incorrect result</span>
                 </div>
             </div>
 
-            <div class="form-group" th:classappend="${#fields.hasErrors('timeString')}? 'has-error'">
-                <label for="timeString" class="col-lg-2 control-label">时间</label>
-                <div class="input-group date form_datetime col-md-10" data-link-field="timeString">
-                    <input class="form-control" size="16" type="text" value="" readonly>
-                    <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
-                    <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
-                    <span class="help-block" th:if="${#fields.hasErrors('timeString')}" th:errors="*{timeString}">Incorrect time</span>
+            <div class="form-group" th:classappend="${#fields.hasErrors('summary')}? 'has-error'">
+                <label for="summary" class="col-lg-2 control-label">总结与体会</label>
+                <div class="col-lg-10">
+                    <input type="text" class="form-control input-lg" id="summary" placeholder="Content"
+                           th:field="*{summary}"/>
+                    <span class="help-block" th:if="${#fields.hasErrors('summary')}"
+                          th:errors="*{summary}">Incorrect summary</span>
                 </div>
-                <input type="hidden" id="timeString" value="" th:field="*{timeString}"/><br/>
             </div>
 
-            <div class="form-group" th:classappend="${#fields.hasErrors('place')}? 'has-error'">
-                <label for="place" class="col-lg-2 control-label">地点</label>
+            <div th:if="${#authorization.expression('hasRole(''ROLE_TEACHER'')')}" class="form-group"
+                 th:classappend="${#fields.hasErrors('remarks')}? 'has-error'">
+                <label for="remarks" class="col-lg-2 control-label">批阅评语</label>
                 <div class="col-lg-10">
-                    <input type="text" class="form-control" id="place" placeholder="Place" th:field="*{place}"/>
-                    <span class="help-block" th:if="${#fields.hasErrors('place')}"
-                          th:errors="*{place}">Incorrect place</span>
+                    <input type="text" class="form-control input-lg" id="remarks" placeholder="Content"
+                           th:field="*{remarks}"/>
+                    <span class="help-block" th:if="${#fields.hasErrors('remarks')}"
+                          th:errors="*{remarks}">Incorrect remarks</span>
                 </div>
             </div>
 

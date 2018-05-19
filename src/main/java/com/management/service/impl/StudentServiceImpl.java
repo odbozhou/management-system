@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import java.util.Date;
 
@@ -44,20 +45,18 @@ public class StudentServiceImpl extends BaseServiceImpl<Student> implements Stud
     @Override
     public void add(Student student) {
         User userParam = new User();
-        userParam.setLoginName(student.getPhone().toString());
-        userParam.setPasswd("123456");
-        userParam.setRole("ROLE_STUDENT");
-        User user = userService.createNewUser(userParam);
-        logger.info("user id = {}", user.getUserId());
-        student.setCreateTime(new Date());
-        student.setUpdateTime(new Date());
-
-        student.setUserId(user.getUserId());
-
-
-        logger.info("student user id = {}", student.getUserId());
-
-        save(student);
+        if (!StringUtils.isEmpty(student.getSno())) {
+            userParam.setLoginName(student.getSno());
+            userParam.setPasswd("123456");
+            userParam.setRole("ROLE_STUDENT");
+            User user = userService.createNewUser(userParam);
+            logger.info("user id = {}", user.getUserId());
+            student.setCreateTime(new Date());
+            student.setUpdateTime(new Date());
+            student.setUserId(user.getUserId());
+            logger.info("student user id = {}", student.getUserId());
+            save(student);
+        }
     }
 
     @Transactional(rollbackFor = Exception.class)
@@ -84,5 +83,10 @@ public class StudentServiceImpl extends BaseServiceImpl<Student> implements Stud
             }
         }
         update(student);
+    }
+
+    @Override
+    public Student getBySno(String userName) {
+        return studentDao.getBySno(userName);
     }
 }

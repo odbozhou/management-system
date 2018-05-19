@@ -13,4 +13,6 @@ public interface StudentService extends BaseService<Student> {
     int remove(Integer id);
 
     void renew(Student student);
+
+    Student getBySno(String userName);
 }

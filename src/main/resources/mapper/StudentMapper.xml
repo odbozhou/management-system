@@ -27,6 +27,12 @@
         <include refid="Base_Column_List"/>
         from student
     </select>
+    <select id="getBySno" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from student
+        where sno = #{sno,jdbcType=VARCHAR}
+    </select>
     <delete id="delete" parameterType="java.lang.Integer">
     delete from student
     where sid = #{sid,jdbcType=INTEGER}

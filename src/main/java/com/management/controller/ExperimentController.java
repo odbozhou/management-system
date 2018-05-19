@@ -4,11 +4,9 @@ package com.management.controller;/**
 
 import com.management.model.AjaxUtils;
 import com.management.model.Experiment;
+import com.management.model.Student;
 import com.management.model.Teacher;
-import com.management.service.CourseService;
-import com.management.service.ExperimentService;
-import com.management.service.GradeService;
-import com.management.service.TeacherService;
+import com.management.service.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.validation.Valid;
 import java.security.Principal;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author jiajia
@@ -46,14 +45,29 @@ public class ExperimentController {
     @Autowired
     private TeacherService teacherService;
 
+    @Autowired
+    private StudentService studentService;
+
     @ModelAttribute("module")
     public String module() {
         return "experiment";
     }
 
     @RequestMapping(value = "experiment", method = RequestMethod.GET)
-    public String experiments(Model model) {
-        model.addAttribute("experiments", experimentService.getAll());
+    public String experiments(Model model, Principal principal) {
+        UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = (UsernamePasswordAuthenticationToken) principal;
+        String userName = usernamePasswordAuthenticationToken.getName();
+        Teacher teacher = teacherService.getByPhone(userName);
+        List<Experiment> experiments = null;
+        if (null != teacher) {
+            experiments = experimentService.listByTid(teacher.getTid());
+        } else {
+            Student student = studentService.getBySno(userName);
+            if (null != student) {
+                experiments = experimentService.listByGid(student.getGid());
+            }
+        }
+        model.addAttribute("experiments", experiments);
         model.addAttribute("courses", courseService.getAll());
         model.addAttribute("grades", gradeService.getAll());
         return "experiment/experiment-list";

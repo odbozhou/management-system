@@ -36,4 +36,14 @@ public class ExperimentServiceImpl extends BaseServiceImpl<Experiment> implement
     public List<Experiment> getAll() {
         return experimentDao.getAll();
     }
+
+    @Override
+    public List<Experiment> listByTid(Integer tid) {
+        return experimentDao.listByTid(tid);
+    }
+
+    @Override
+    public List<Experiment> listByGid(Integer gid) {
+        return experimentDao.listByGid(gid);
+    }
 }

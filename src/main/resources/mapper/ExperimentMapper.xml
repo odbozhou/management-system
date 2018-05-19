@@ -38,6 +38,22 @@
         <include refid="Blob_Column_List"/>
         from experiment
     </select>
+    <select id="listByTid" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from experiment
+        where tid = #{tid,jdbcType=INTEGER}
+    </select>
+    <select id="listByGid" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from experiment
+        where gid = #{gid,jdbcType=INTEGER}
+    </select>
     <delete id="delete" parameterType="java.lang.Integer">
         delete from experiment
         where eid = #{eid,jdbcType=INTEGER}

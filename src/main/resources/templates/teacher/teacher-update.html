@@ -19,7 +19,12 @@
 
 </head>
 <body>
-
+<header th:insert="teacher/layout :: header(~{ :: .breadcrumb})">
+    <ol class="breadcrumb container">
+        <li><a href="#" th:href="@{/}">Home</a></li>
+        <li><a href="#">Teachers</a></li>
+    </ol>
+</header>
 <div class="container">
     <form class="form-narrow form-horizontal" method="post" th:action="@{/teacher/update}" th:object="${teacher}"
           th:fragment="teacherForm">

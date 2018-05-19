@@ -23,7 +23,7 @@
 <header th:insert="fragments/layout :: header(~{ :: .breadcrumb})">
     <ol class="breadcrumb container">
         <li><a href="#" th:href="@{/}">Home</a></li>
-        <li><a href="#">Experiments</a></li>
+        <li><a href="#">ExperimentReports</a></li>
     </ol>
 </header>
 
@@ -34,22 +34,25 @@
             <thead>
             <tr>
                 <td>ID</td>
-                <td>课程</td>
-                <td>实验大纲</td>
-                <td>实验内容</td>
-                <td>时间</td>
-                <td>地点</td>
-                <td>状态</td>
+                <td>实验</td>
+                <td>实验目的</td>
+                <td>实验步骤</td>
+                <td>发现的问题</td>
+                <td>实验结果</td>
+                <td>总结与体会</td>
+                <td th:if="${#authorization.expression('hasRole(''ROLE_TEACHER'')')}">批阅评语</td>
+                <td th:if="${#authorization.expression('hasRole(''ROLE_TEACHER'')')}">是否批阅</td>
                 <td>创建时间</td>
                 <td>更新时间</td>
                 <td>更新</td>
-                <td>删除</td>
+                <td th:if="${#authorization.expression('hasRole(''ROLE_STUDENT'')')}">删除</td>
             </tr>
             </thead>
             <tbody>
             <div class="text-right">
                 <p>
-                    <a id="add" class="btn btn-success btn-lg" href="#" th:href="@{/experimentReport/add}">新增</a>
+                    <a th:if="${#authorization.expression('hasRole(''ROLE_STUDENTR'')')}" id="add"
+                       class="btn btn-success btn-lg" href="#" th:href="@{/experimentReport/add}">新增</a>
                 </p>
             </div>
             <tr th:if="${experimentReports.empty}">
@@ -57,30 +60,51 @@
             </tr>
             <tr th:each="experimentReport : ${experimentReports}">
                 <td th:text="${experimentReport.erid}">1</td>
+                <td>
+                    <div th:switch="${experimentReport.eid}">
+                        <p th:each="experiment : ${experiments}" th:case="${experiment.eid}"><span
+                                th:text="${experiment.name}"/></p>
+                    </div>
+                </td>
+                -->
                 <!--           <td>
                                <a href="#" th:href="@{/experimentReport/{id}(id=${experimentReport.erid})}" th:text="${experimentReport.name}">Title ...</a>
                            </td>-->
-                <td>
-                    <div th:switch="${experimentReport.cid}">
-                        <p th:each="course : ${courses}" th:case="${course.cid}"><span th:text="${course.name}"/></p>
-                    </div>
-                </td>
+                <!--             <td>
+                                 <div th:switch="${experimentReport.cid}">
+                                     <p th:each="course : ${courses}" th:case="${course.cid}"><span th:text="${course.name}"/></p>
+                                 </div>
+                             </td>-->
                 <!--                <td>
                                    <div th:switch="${experimentReport.gid}">
                                        <p th:each="grade : ${grades}" th:case="${grade.gid}"><span th:text="${grade.name}"/></p>
                                    </div>
                                </td>-->
-                <td th:text="${experiment.outline}">Outline ...</td>
-                <td th:text="${experiment.content}">Content ...</td>
-                <td th:text="${#dates.format(experiment.time, 'yyyy-MM-dd hh:mm:ss')}">No Time</td>
-                <td th:text="${experiment.place}">Place ...</td>
-                <td th:text="${experimentReport.readStatus}">ReadStatus ...</td>
+                <!--    <td th:text="${experiment.outline}">Outline ...</td>
+                    <td th:text="${experiment.content}">Content ...</td>
+                    <td th:text="${#dates.format(experiment.time, 'yyyy-MM-dd hh:mm:ss')}">No Time</td>
+                    <td th:text="${experiment.place}">Place ...</td>-->
+                <td th:text="${experimentReport.objective}">Objective ...</td>
+                <td th:text="${experimentReport.step}">Step ...</td>
+                <td th:text="${experimentReport.problem}">Problem ...</td>
+                <td th:text="${experimentReport.result}">esult ...</td>
+                <td th:text="${experimentReport.summary}">Summary ...</td>
+                <td th:if="${#authorization.expression('hasRole(''ROLE_TEACHER'')')}"
+                    th:text="${experimentReport.remarks}">Remarks ...
+                </td>
+                <td th:if="${#authorization.expression('hasRole(''ROLE_TEACHER'')')}">
+                    <div th:switch="${experimentReport.readStatus}">
+                        <p th:case="0">未批阅</p>
+                        <p th:case="1">已批阅</p>
+                        <p th:case="*">未批阅</p>
+                    </div>
+                </td>
                 <td th:text="${#dates.format(experimentReport.createTime, 'yyyy-MM-dd hh:mm:ss')}">No createTime</td>
                 <td th:text="${#dates.format(experimentReport.updateTime, 'yyyy-MM-dd hh:mm:ss')}">No updateTime</td>
-                <td>
+                <td th:if="${(#authorization.expression('hasRole(''ROLE_TEACHER'')')) or (experimentReport.readStatus !=1 and #authorization.expression('hasRole(''ROLE_STUDENT'')'))}">
                     <a href="#" th:href="@{/experimentReport/update/{id}(id=${experimentReport.erid})}">更新</a>
                 </td>
-                <td>
+                <td th:if="${experimentReport.readStatus !=1 and #authorization.expression('hasRole(''ROLE_STUDENT'')')}">
                     <a href="#" th:href="@{/experimentReport/delete/{id}(id=${experimentReport.erid})}">删除</a>
                 </td>
             </tr>

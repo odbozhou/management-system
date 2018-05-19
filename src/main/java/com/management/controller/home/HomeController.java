@@ -83,8 +83,8 @@ class HomeController {
                 menu2.setModule("experimentReport");
                 Menu menu3 = new Menu();
                 menu3.setName("个人信息");
-                menu3.setUrl("/userInfo");
-                menu3.setModule("userInfo");
+                menu3.setUrl("/user");
+                menu3.setModule("user");
                 menus.add(menu);
                 menus.add(menu1);
                 menus.add(menu2);
@@ -107,8 +107,8 @@ class HomeController {
                 menu2.setModule("experimentReport");
                 Menu menu3 = new Menu();
                 menu3.setName("个人信息");
-                menu3.setUrl("/userInfo");
-                menu3.setModule("userInfo");
+                menu3.setUrl("/user");
+                menu3.setModule("user");
                 menus.add(menu);
                 menus.add(menu1);
                 menus.add(menu2);

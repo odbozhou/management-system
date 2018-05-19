@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!--/* Title of this template will be passed to the head fragment along with custom links and scripts */-->
+<head th:replace="fragments/layout :: head(~{this :: title}, ~{this :: .custom-link}, ~{this :: .custom-script})">
+    <title>Teacher Details</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="../../static/css/bootstrap.min.css" rel="stylesheet" media="screen"
+          th:href="@{/css/bootstrap.min.css}"/>
+    <link href="../../static/css/core.css" rel="stylesheet" media="screen" th:href="@{/css/core.css}"/>
+
+    <!-- Custom links for this page only -->
+    <link class="custom-link" href="../../static/css/custom/custom.css" th:href="@{/css/custom/custom.css}"/>
+
+    <script src="../../static/js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
+    <script src="../../static/js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
+
+    <!-- Custom scripts for this page only -->
+    <script class="custom-script" src="../../static/js/custom/custom.js" th:src="@{/js/custom/custom.js}"></script>
+
+</head>
+<body>
+
+<div class="container">
+    <form class="form-narrow form-horizontal" method="post" th:action="@{/user/update}" th:object="${user}"
+          th:fragment="userForm">
+        <!--/* Show general error message when form contains errors */-->
+        <th:block th:if="${#fields.hasErrors('${user.*}')}">
+            <div th:replace="fragments/alert :: alert (type='danger', message='Form contains errors. Please try again.')">
+                Alert
+            </div>
+        </th:block>
+        <fieldset>
+            <legend>修改密码</legend>
+            <input type="text" id="userId" hidden="hidden" th:field="*{userId}"/>
+            <div class="form-group" th:classappend="${#fields.hasErrors('loginName')}? 'has-error'">
+                <label for="loginName" class="col-lg-2 control-label">账号</label>
+                <div class="col-lg-10">
+                    <input type="text" class="form-control" id="loginName" placeholder="Name" th:field="*{loginName}"
+                           readonly/>
+                    <span class="help-block" th:if="${#fields.hasErrors('loginName')}"
+                          th:errors="*{loginName}">Incorrect loginName</span>
+                </div>
+            </div>
+
+            <div class="form-group" th:classappend="${#fields.hasErrors('passwd')}? 'has-error'">
+                <label for="passwd" class="col-lg-2 control-label">旧密码</label>
+                <div class="col-lg-10">
+                    <input type="password" class="form-control" id="passwd" placeholder="Name" th:field="*{passwd}"/>
+                    <span class="help-block" th:if="${#fields.hasErrors('passwd')}"
+                          th:errors="*{passwd}">Incorrect passwd</span>
+                </div>
+            </div>
+
+            <div class="form-group" th:classappend="${#fields.hasErrors('newpasswd')}? 'has-error'">
+                <label for="newpasswd" class="col-lg-2 control-label">新密码</label>
+                <div class="col-lg-10">
+                    <input type="password" class="form-control" id="newpasswd" placeholder="Name"
+                           th:field="*{newpasswd}"/>
+                    <span class="help-block" th:if="${#fields.hasErrors('newpasswd')}"
+                          th:errors="*{newpasswd}">Incorrect newpasswd</span>
+                </div>
+            </div>
+
+            <div class="form-group" th:classappend="${#fields.hasErrors('repasswd')}? 'has-error'">
+                <label for="repasswd" class="col-lg-2 control-label">确认密码</label>
+                <div class="col-lg-10">
+                    <input type="password" class="form-control" id="repasswd" placeholder="Name"
+                           th:field="*{repasswd}"/>
+                    <span class="help-block" th:if="${#fields.hasErrors('repasswd')}"
+                          th:errors="*{repasswd}">Incorrect repasswd</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-lg-offset-2 col-lg-10">
+                    <button type="submit" class="btn btn-default">保存</button>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div>
+
+</body>
+</html>

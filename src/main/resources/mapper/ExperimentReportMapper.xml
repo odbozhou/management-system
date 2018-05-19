@@ -3,7 +3,6 @@
 <mapper namespace="com.management.dao.ExperimentReportDao">
     <resultMap id="BaseResultMap" type="com.management.model.ExperimentReport">
         <id column="erid" jdbcType="INTEGER" property="erid"/>
-        <result column="cid" jdbcType="INTEGER" property="cid"/>
         <result column="sid" jdbcType="INTEGER" property="sid"/>
         <result column="eid" jdbcType="INTEGER" property="eid"/>
         <result column="objective" jdbcType="VARCHAR" property="objective"/>
@@ -18,7 +17,7 @@
         <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
     </resultMap>
     <sql id="Base_Column_List">
-    erid, cid, sid, eid, objective, step, problem, result, summary, remarks, read_status, 
+        erid, sid, eid, objective, step, problem, result, summary, remarks, read_status,
     status, create_time, update_time
   </sql>
     <select id="get" parameterType="java.lang.Integer" resultMap="BaseResultMap">
@@ -26,6 +25,22 @@
         <include refid="Base_Column_List"/>
         from experiment_report
         where erid = #{erid,jdbcType=INTEGER}
+    </select>
+    <select id="listByEids" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from experiment_report
+        where eid in
+        <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+            #{item,jdbcType=INTEGER}
+        </foreach>
+        order by read_status , update_time desc
+    </select>
+    <select id="listBySid" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from experiment_report
+        where sid = #{sid,jdbcType=INTEGER}
     </select>
     <select id="getAll" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select
@@ -41,9 +56,6 @@
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="erid != null">
                 erid,
-            </if>
-            <if test="cid != null">
-                cid,
             </if>
             <if test="sid != null">
                 sid,
@@ -86,9 +98,6 @@
             <if test="erid != null">
                 #{erid,jdbcType=INTEGER},
             </if>
-            <if test="cid != null">
-                #{cid,jdbcType=INTEGER},
-            </if>
             <if test="sid != null">
                 #{sid,jdbcType=INTEGER},
             </if>
@@ -130,9 +139,6 @@
     <update id="update" parameterType="com.management.model.ExperimentReport">
         update experiment_report
         <set>
-            <if test="cid != null">
-                cid = #{cid,jdbcType=INTEGER},
-            </if>
             <if test="sid != null">
                 sid = #{sid,jdbcType=INTEGER},
             </if>

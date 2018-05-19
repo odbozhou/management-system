@@ -6,13 +6,12 @@
 </head>
 <body>
 
-
-<div class="form-group" th:classappend="${#fields.hasErrors('summary')}? 'has-error'">
-    <label for="summary" class="col-lg-2 control-label">内容</label>
+<div class="form-group" th:classappend="${#fields.hasErrors('newpasswd')}? 'has-error'">
+    <label for="newpasswd" class="col-lg-2 control-label">姓名</label>
     <div class="col-lg-10">
-        <input type="text" class="form-control input-lg" id="summary" placeholder="Content" th:field="*{summary}"/>
-        <span class="help-block" th:if="${#fields.hasErrors('summary')}"
-              th:errors="*{summary}">Incorrect summary</span>
+        <input type="text" class="form-control" id="newpasswd" placeholder="Name" th:field="*{newpasswd}" readonly/>
+        <span class="help-block" th:if="${#fields.hasErrors('newpasswd')}"
+              th:errors="*{newpasswd}">Incorrect newpasswd</span>
     </div>
 </div>
 

@@ -43,14 +43,15 @@
                 <td>地点</td>
                 <td>创建时间</td>
                 <td>更新时间</td>
-                <td>更新</td>
-                <td>删除</td>
+                <td th:if="${#authorization.expression('hasRole(''ROLE_TEACHER'')')}">更新</td>
+                <td th:if="${#authorization.expression('hasRole(''ROLE_TEACHER'')')}">删除</td>
             </tr>
             </thead>
             <tbody>
             <div class="text-right">
                 <p>
-                    <a id="add" class="btn btn-success btn-lg" href="#" th:href="@{/experiment/add}">新增</a>
+                    <a th:if="${#authorization.expression('hasRole(''ROLE_TEACHER'')')}" id="add"
+                       class="btn btn-success btn-lg" href="#" th:href="@{/experiment/add}">新增</a>
                 </p>
             </div>
             <tr th:if="${experiments.empty}">
@@ -79,10 +80,12 @@
                 <td th:text="${#dates.format(experiment.createTime, 'yyyy-MM-dd hh:mm:ss')}">No createTime</td>
                 <td th:text="${#dates.format(experiment.updateTime, 'yyyy-MM-dd hh:mm:ss')}">No updateTime</td>
                 <td>
-                    <a href="#" th:href="@{/experiment/update/{id}(id=${experiment.eid})}">更新</a>
+                    <a th:if="${#authorization.expression('hasRole(''ROLE_TEACHER'')')}" href="#"
+                       th:href="@{/experiment/update/{id}(id=${experiment.eid})}">更新</a>
                 </td>
                 <td>
-                    <a href="#" th:href="@{/experiment/delete/{id}(id=${experiment.eid})}">删除</a>
+                    <a th:if="${#authorization.expression('hasRole(''ROLE_TEACHER'')')}" href="#"
+                       th:href="@{/experiment/delete/{id}(id=${experiment.eid})}">删除</a>
                 </td>
             </tr>
             </tbody>

@@ -7,6 +7,8 @@ import com.management.common.BaseServiceImpl;
 import com.management.dao.UserDao;
 import com.management.model.User;
 import com.management.service.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -32,6 +34,8 @@ import java.util.Date;
  */
 @Service
 public class UserServiceImpl extends BaseServiceImpl<User> implements UserService, UserDetailsService {
+
+    private static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
 
     @Autowired
     private UserDao userDao;
@@ -72,6 +76,29 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
         userParam.setUpdateTime(new Date());
         userParam.setUserName(userParam.getLoginName());
         return save(userParam);
+    }
+
+    @Override
+    public User getByLoginName(String userName) {
+        return userDao.loadUserByUsername(userName);
+    }
+
+    @Override
+    public Boolean updatePasswd(User user) {
+        user.setUpdateTime(new Date());
+        User oldUser = get(user.getUserId());
+        passwordEncoder.encode(user.getPasswd());
+
+        String inputPasswd = passwordEncoder.encode(user.getPasswd());
+        logger.info("passwd = {}", user.getPasswd());
+        logger.info("passwd = {}", inputPasswd);
+        logger.info("oldPasswd = {}", oldUser.getPasswd());
+        if (!inputPasswd.equals(oldUser.getPasswd())) {
+            return Boolean.FALSE;
+        }
+        user.setPasswd(passwordEncoder.encode(user.getNewpasswd()));
+        update(user);
+        return Boolean.TRUE;
     }
 
     private Authentication authenticate(User user) {

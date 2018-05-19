@@ -5,6 +5,8 @@ package com.management.service;/**
 import com.management.common.BaseService;
 import com.management.model.Experiment;
 
+import java.util.List;
+
 /**
  * @author jiajia
  * @version V1.0
@@ -12,4 +14,7 @@ import com.management.model.Experiment;
  * @date 2018/5/16 22:54
  */
 public interface ExperimentService extends BaseService<Experiment> {
+    List<Experiment> listByTid(Integer tid);
+
+    List<Experiment> listByGid(Integer gid);
 }

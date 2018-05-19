@@ -19,6 +19,14 @@
 </head>
 <body>
 
+<header th:insert="fragments/layout :: header(~{ :: .breadcrumb})">
+    <ol class="breadcrumb container">
+        <li><a href="#" th:href="@{/}">Home</a></li>
+        <li><a href="#" th:href="@{/experimentReport}">ExperimentReports</a></li>
+        <li th:text="${'ExperimentReport ' + experimentReport.erid}">ExperimentReport</li>
+    </ol>
+</header>
+
 <div class="container">
     <form class="form-narrow form-horizontal" method="post" th:action="@{/experimentReport/add}"
           th:object="${experimentReport}"
@@ -32,46 +40,19 @@
         <fieldset>
             <legend>新增实验报告</legend>
 
-            <div class="form-group" th:classappend="${#fields.hasErrors('eno')}? 'has-error'">
-                <label for="eno" class="col-lg-2 control-label">学号</label>
+            <div class="form-group" th:classappend="${#fields.hasErrors('eid')}? 'has-error'">
+                <label for="eid" class="col-lg-2 control-label">实验</label>
                 <div class="col-lg-10">
-                    <input type="text" class="form-control" id="eno" placeholder="Name" th:field="*{eno}"/>
-                    <span class="help-block" th:if="${#fields.hasErrors('eno')}"
-                          th:errors="*{eno}">Incorrect eno</span>
-                </div>
-            </div>
-
-            <div class="form-group" th:classappend="${#fields.hasErrors('name')}? 'has-error'">
-                <label for="name" class="col-lg-2 control-label">名称</label>
-                <div class="col-lg-10">
-                    <input type="text" class="form-control" id="name" placeholder="Name" th:field="*{name}"/>
-                    <span class="help-block" th:if="${#fields.hasErrors('name')}"
-                          th:errors="*{name}">Incorrect name</span>
-                </div>
-            </div>
-
-            <div class="form-group" th:classappend="${#fields.hasErrors('cid')}? 'has-error'">
-                <label for="cid" class="col-lg-2 control-label">课程</label>
-                <div class="col-lg-10">
-                    <select class="form-control" id="cid" th:field="*{cid}">
-                        <option th:each="course : ${courses}" th:value="${course.cid}"><span th:text="${course.name}"/>
-                        </option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="form-group" th:classappend="${#fields.hasErrors('gid')}? 'has-error'">
-                <label for="gid" class="col-lg-2 control-label">班级</label>
-                <div class="col-lg-10">
-                    <select class="form-control" id="gid" th:field="*{gid}">
-                        <option th:each="grade : ${grades}" th:value="${grade.gid}"><span th:text="${grade.name}"/>
+                    <select class="form-control" id="eid" th:field="*{eid}">
+                        <option th:each="experiment : ${experiments}" th:value="${experiment.eid}"><span
+                                th:text="${experiment.name}"/>
                         </option>
                     </select>
                 </div>
             </div>
 
             <div class="form-group" th:classappend="${#fields.hasErrors('objective')}? 'has-error'">
-                <label for="objective" class="col-lg-2 control-label">名称</label>
+                <label for="objective" class="col-lg-2 control-label">实验目的</label>
                 <div class="col-lg-10">
                     <input type="text" class="form-control" id="objective" placeholder="Name" th:field="*{objective}"/>
                     <span class="help-block" th:if="${#fields.hasErrors('objective')}"
@@ -80,7 +61,7 @@
             </div>
 
             <div class="form-group" th:classappend="${#fields.hasErrors('step')}? 'has-error'">
-                <label for="step" class="col-lg-2 control-label">大纲</label>
+                <label for="step" class="col-lg-4 control-label">实验步骤</label>
                 <div class="col-lg-10">
                     <input type="text" class="form-control input-lg" id="step" placeholder="Outline"
                            th:field="*{step}"/>
@@ -90,7 +71,7 @@
             </div>
 
             <div class="form-group" th:classappend="${#fields.hasErrors('problem')}? 'has-error'">
-                <label for="problem" class="col-lg-2 control-label">内容</label>
+                <label for="problem" class="col-lg-2 control-label">发现的问题</label>
                 <div class="col-lg-10">
                     <input type="text" class="form-control input-lg" id="problem" placeholder="Content"
                            th:field="*{problem}"/>
@@ -100,7 +81,7 @@
             </div>
 
             <div class="form-group" th:classappend="${#fields.hasErrors('result')}? 'has-error'">
-                <label for="result" class="col-lg-2 control-label">内容</label>
+                <label for="result" class="col-lg-2 control-label">实验结果</label>
                 <div class="col-lg-10">
                     <input type="text" class="form-control input-lg" id="result" placeholder="Content"
                            th:field="*{result}"/>
@@ -110,7 +91,7 @@
             </div>
 
             <div class="form-group" th:classappend="${#fields.hasErrors('summary')}? 'has-error'">
-                <label for="summary" class="col-lg-2 control-label">内容</label>
+                <label for="summary" class="col-lg-2 control-label">总结与体会</label>
                 <div class="col-lg-10">
                     <input type="text" class="form-control input-lg" id="summary" placeholder="Content"
                            th:field="*{summary}"/>

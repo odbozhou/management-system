@@ -12,17 +12,17 @@
         <div th:replace="fragments/alert :: alert (type='danger', message='Sign in error. Please try again.')">Alert</div>
     </th:block>
     <fieldset>
-        <legend>Please Sign In</legend>
+        <legend>登陆</legend>
         <div class="form-group">
-            <label for="inputEmail" class="col-lg-2 control-label">Email</label>
+            <label for="inputEmail" class="col-lg-2 control-label">账号</label>
             <div class="col-lg-10">
-                <input type="text" class="form-control" id="inputEmail" placeholder="Email" name="username" />
+                <input type="text" class="form-control" id="inputEmail" name="username"/>
             </div>
         </div>
         <div class="form-group">
-            <label for="inputPassword" class="col-lg-2 control-label">Password</label>
+            <label for="inputPassword" class="col-lg-2 control-label">密码</label>
             <div class="col-lg-10">
-                <input type="password" class="form-control" id="inputPassword" placeholder="Password" name="password" />
+                <input type="password" class="form-control" id="inputPassword" " name="password" />
             </div>
         </div>
         <div class="form-group">
@@ -36,14 +36,14 @@
         </div>
         <div class="form-group">
             <div class="col-lg-offset-2 col-lg-10">
-                <button type="submit" class="btn btn-default">Sign in</button>
+                <button type="submit" class="btn btn-default">登陆</button>
             </div>
         </div>
-        <div class="form-group">
-            <div class="col-lg-offset-2 col-lg-10">
-                <p>New here? <a href="signup" th:href="@{/signup}">Sign Up</a></p>
-            </div>
-        </div>
+        <!--        <div class="form-group">
+                    <div class="col-lg-offset-2 col-lg-10">
+                        <p>New here? <a href="signup" th:href="@{/signup}">Sign Up</a></p>
+                    </div>
+                </div>-->
     </fieldset>
 </form>
 </body>

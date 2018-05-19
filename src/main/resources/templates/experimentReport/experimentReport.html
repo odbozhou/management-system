@@ -33,7 +33,10 @@
 <div th:insert="fragments/layout :: content(~{ :: #experimentReport-details})">
     <div id="experimentReport-details">
         <h2 th:text="${experimentReport.erid}">ExperimentReport Details</h2>
-        <div th:text="${experimentReport.name}">Name</div>
+        <div th:switch="${experimentReport.eid}">
+            <p th:each="experiment : ${experiments}" th:case="${experiment.eid}"><span th:text="${experiment.name}"/>
+            </p>
+        </div>
         <div th:switch="${experimentReport.cid}">
             <p th:each="course : ${courses}" th:case="${course.cid}"><span th:text="${course.name}"/></p>
         </div>
@@ -44,6 +47,11 @@
         <div th:text="${experimentReport.content}">Content</div>
         <div th:text="${#dates.format(experimentReport.time, 'yyyy-MM-dd hh:mm:ss')}">Time</div>
         <div th:text="${experimentReport.place}">Place</div>
+        <div th:text="${experimentReport.objective}">Outline</div>
+        <div th:text="${experimentReport.step}">Outline</div>
+        <div th:text="${experimentReport.problem}">Outline</div>
+        <div th:text="${experimentReport.result}">Outline</div>
+        <div th:text="${experimentReport.summary}">Outline</div>
         <div th:text="${#dates.format(experimentReport.createTime, 'yyyy-MM-dd hh:mm:ss')}">CreateTime</div>
         <div th:text="${#dates.format(experimentReport.updateTime, 'yyyy-MM-dd hh:mm:ss')}">UpdateTime</div>
     </div>
