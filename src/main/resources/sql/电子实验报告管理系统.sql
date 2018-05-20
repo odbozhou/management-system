@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS `experiment` (
   `content` text NOT NULL,
   `time` datetime NOT NULL,
   `place` varchar(200) NOT NULL,
-  `status` tinyint(2) NOT NULL,
+  `status` tinyint(2) NOT NULL COMMENT '0-无效，1-有效',
   `create_time` datetime NOT NULL,
   `update_time` datetime NOT NULL,
   PRIMARY KEY (`eid`)
@@ -51,7 +51,6 @@ CREATE TABLE IF NOT EXISTS `experiment` (
 -- 导出  表 electronic_report.experiment_report 结构
 CREATE TABLE IF NOT EXISTS `experiment_report` (
   `erid` int(11) NOT NULL AUTO_INCREMENT,
-  `cid` int(11) NOT NULL,
   `sid` int(11) NOT NULL,
   `eid` int(11) NOT NULL,
   `objective` varchar(500) NOT NULL,
@@ -59,7 +58,7 @@ CREATE TABLE IF NOT EXISTS `experiment_report` (
   `problem` varchar(500) NOT NULL,
   `result` varchar(500) NOT NULL,
   `summary` varchar(500) NOT NULL,
-  `remarks` varchar(500) NOT NULL,
+  `remarks` varchar(500) DEFAULT NULL,
   `read_status` tinyint(2) NOT NULL,
   `status` tinyint(2) NOT NULL,
   `create_time` datetime NOT NULL,
@@ -129,6 +128,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `uniq_login_name` (`login_name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户表';
+
 
 INSERT INTO `user` (`user_id`, `login_name`, `user_name`, `passwd`, `role`, `status`, `delete_status`, `create_time`, `update_time`) VALUES
 	(1, 'student', 'student', '$2a$10$XPSKuiUlBx2qnYy88m60KOMGTrTmM90ne8ULxkcQMgJeNOBUQm5wW', 'ROLE_STUDENT', 1, 1, '2018-05-13 15:09:36', '2018-05-13 15:09:36'),
