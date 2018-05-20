@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Primary;
 import javax.sql.DataSource;
 
 @SpringBootApplication
-@MapperScan("com.management.dao.")
+@MapperScan("com.management.dao")
 public class ElectronicExperimentalReportManagementApplication {
 
 	@Primary
