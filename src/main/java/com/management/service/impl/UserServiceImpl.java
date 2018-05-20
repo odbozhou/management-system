@@ -88,12 +88,11 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
         user.setUpdateTime(new Date());
         User oldUser = get(user.getUserId());
         passwordEncoder.encode(user.getPasswd());
-
-        String inputPasswd = passwordEncoder.encode(user.getPasswd());
-        logger.info("passwd = {}", user.getPasswd());
+        boolean flag = passwordEncoder.matches(user.getPasswd(), passwordEncoder.encode(user.getPasswd()));
+/*        logger.info("passwd = {}", user.getPasswd());
         logger.info("passwd = {}", inputPasswd);
-        logger.info("oldPasswd = {}", oldUser.getPasswd());
-        if (!inputPasswd.equals(oldUser.getPasswd())) {
+        logger.info("oldPasswd = {}", oldUser.getPasswd());*/
+        if (!flag) {
             return Boolean.FALSE;
         }
         user.setPasswd(passwordEncoder.encode(user.getNewpasswd()));
