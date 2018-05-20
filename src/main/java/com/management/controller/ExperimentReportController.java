@@ -53,8 +53,8 @@ public class ExperimentReportController {
         String userName = usernamePasswordAuthenticationToken.getName();
         Teacher teacher = teacherService.getByPhone(userName);
 
-        List<ExperimentReport> experimentReports = null;
-        List<Experiment> experiments = null;
+        List<ExperimentReport> experimentReports = new ArrayList<>(8);
+        List<Experiment> experiments = new ArrayList<>(8);
         if (null != teacher) {
             experiments = experimentService.listByTid(teacher.getTid());
             List<Integer> eids = new ArrayList<>(16);

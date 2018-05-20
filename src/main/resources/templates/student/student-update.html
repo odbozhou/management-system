@@ -62,7 +62,7 @@
                 <label for="sex" class="col-lg-2 control-label">班级</label>
                 <div class="col-lg-10">
                     <select class="form-control" id="gid" th:field="*{gid}">
-                        <option th:each="grade : ${#dates.create()grades}" th:value="${grade.gid}"><span
+                        <option th:each="grade : ${grades}" th:value="${grade.gid}"><span
                                 th:text="${grade.name}"/>
                         </option>
                     </select>

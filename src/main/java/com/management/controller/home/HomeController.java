@@ -28,7 +28,6 @@ class HomeController {
         if (principal == null) {
             return "home/homeNotSignedIn";
         }
-//        return principal != null ? "home/homeSignedIn" : "home/homeNotSignedIn";
         UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = (UsernamePasswordAuthenticationToken) principal;
         Collection<GrantedAuthority> authorities = usernamePasswordAuthenticationToken.getAuthorities();
         for (GrantedAuthority grantedAuthority : authorities) {
@@ -43,10 +42,6 @@ class HomeController {
                 menu2.setName("教师信息管理");
                 menu2.setUrl("/teacher");
                 menu2.setModule("teacher");
-                Menu menu3 = new Menu();
-                menu3.setName("实验管理");
-                menu3.setUrl("/experiment");
-                menu3.setModule("experiment");
                 Menu menu5 = new Menu();
                 menu5.setName("学生信息管理");
                 menu5.setUrl("/student");
@@ -64,7 +59,6 @@ class HomeController {
                 menus.add(menu6);
                 menus.add(menu1);
                 menus.add(menu2);
-                menus.add(menu3);
                 model.addAttribute("menus", menus);
                 return "home/adminHomeSignedIn";
             } else if ("ROLE_TEACHER".equals(grantedAuthority.getAuthority())) {

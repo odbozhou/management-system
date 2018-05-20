@@ -19,6 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -58,7 +59,7 @@ public class ExperimentController {
         UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = (UsernamePasswordAuthenticationToken) principal;
         String userName = usernamePasswordAuthenticationToken.getName();
         Teacher teacher = teacherService.getByPhone(userName);
-        List<Experiment> experiments = null;
+        List<Experiment> experiments = new ArrayList<>(8);
         if (null != teacher) {
             experiments = experimentService.listByTid(teacher.getTid());
         } else {
